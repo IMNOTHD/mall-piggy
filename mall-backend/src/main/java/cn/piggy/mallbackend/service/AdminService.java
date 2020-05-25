@@ -1,19 +1,17 @@
 package cn.piggy.mallbackend.service;
 
-import cn.piggy.mallbackend.domain.Member;
+import cn.piggy.mallbackend.domain.Admin;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 会员注册登录Service
- *
  * @author IMNOTHD
- * @date 2020/5/21 0:31
+ * @date 2020/5/24 23:04
  */
-public interface MemberService {
+public interface AdminService {
     @Transactional(rollbackFor = RuntimeException.class)
-    void register(String username, String phone, String password);
+    void register(String username, String email, String password);
 
     String login(String account, String password);
 
-    Member info(String token);
+    Admin info(String token);
 }

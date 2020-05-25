@@ -16,4 +16,8 @@ public class CommonUtil {
         Matcher matcher = NUMBER_PATTERN.matcher(str);
         return matcher.matches();
     }
+
+    public static boolean isStringHasAt(String str) {
+        return str.contains("@");
+    }
 }

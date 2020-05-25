@@ -3,14 +3,13 @@ package cn.piggy.mallbackend.domain;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
-import org.springframework.lang.Nullable;
 
 /**
- * member
- * @author IMNOTHD
+ * admin
+ * @author 
  */
 @Data
-public class Member implements Serializable {
+public class Admin implements Serializable {
     private Integer id;
 
     /**
@@ -21,18 +20,12 @@ public class Member implements Serializable {
     /**
      * 密码
      */
-    @Nullable
     private String password;
 
     /**
-     * 昵称
+     * 邮箱
      */
-    private String nickname;
-
-    /**
-     * 手机号
-     */
-    private String phone;
+    private String email;
 
     /**
      * 注册时间
@@ -40,19 +33,9 @@ public class Member implements Serializable {
     private Date createTime;
 
     /**
-     * 头像
+     * 昵称
      */
-    private String icon;
-
-    /**
-     * 性别：0->未知；1->男；2->女
-     */
-    private Byte gender;
-
-    /**
-     * 生日
-     */
-    private Date birthday;
+    private String nickname;
 
     private static final long serialVersionUID = 1L;
 }

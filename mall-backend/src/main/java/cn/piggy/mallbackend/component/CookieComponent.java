@@ -4,12 +4,10 @@ import cn.piggy.mallbackend.common.UserType;
 import cn.piggy.mallbackend.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
 import java.util.UUID;
-import java.util.function.IntSupplier;
-import java.util.function.Supplier;
 
 /**
  * @author IMNOTHD
@@ -37,8 +35,10 @@ public class CookieComponent {
      */
     public String addCookie(UserType userType, String username) {
         String token = UUID.randomUUID().toString();
-        String key = redisDatabase + ":" + checkUserType(userType) + ":" + token;
+        String key = redisDatabase + ":" + checkUserType(userType) + ":token:" + token;
+        String setKey = redisDatabase + ":" + checkUserType(userType) + ":username:" + username;
         redisService.set(key, username, redisExpire);
+        redisService.setAddWithExpireTime(setKey, redisExpire, token);
         return token;
     }
 
@@ -50,8 +50,39 @@ public class CookieComponent {
      * @return username
      */
     public String getUsername(UserType userType, String token) {
-        String key = redisDatabase + ":" + checkUserType(userType) + ":" + token;
+        String key = redisDatabase + ":" + checkUserType(userType) + ":token:" + token;
         return (String) redisService.get(key);
+    }
+
+    /**
+     * 根据username删除所有对应的token
+     *
+     * @param userType userType
+     * @param username username
+     */
+    public void removeAllToken(UserType userType, String username) {
+        String setKey = redisDatabase + ":" + checkUserType(userType) + ":username:" + username;
+        Set<Object> tokenSet = redisService.setMembers(setKey);
+        for (Object token : tokenSet) {
+            try {
+                redisService.del(redisDatabase + ":" + checkUserType(userType) + ":token:" + token.toString());
+            } catch (Exception ignored) {}
+        }
+        redisService.del(setKey);
+    }
+
+    /**
+     * 删除一个token
+     *
+     * @param userType userType
+     * @param token token
+     */
+    public void removeToken(UserType userType, String token) {
+        String tokenKey = redisDatabase + ":" + checkUserType(userType) + ":token:" + token;
+        String username = (String) redisService.get(tokenKey);
+        String setKey = redisDatabase + ":" + checkUserType(userType) + ":username:" + username;
+        redisService.setRemove(setKey, token);
+        redisService.del(tokenKey);
     }
 
     /**

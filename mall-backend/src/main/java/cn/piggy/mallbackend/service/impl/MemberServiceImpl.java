@@ -37,7 +37,6 @@ public class MemberServiceImpl implements MemberService {
         // 查询该用户是否已存在
         Member memberFromDatabase = memberDao.selectByUsernameOrPhone(username, phone);
         if (memberFromDatabase != null) {
-            System.out.println("FUCK");
             Asserts.validateFail("用户已存在");
         }
         // 用户不存在, 注册用户
@@ -62,8 +61,20 @@ public class MemberServiceImpl implements MemberService {
             return null;
         }
         if (!password.equals(member.getPassword())) {
+            member.setPassword(null);
             return null;
         }
+        member.setPassword(null);
         return cookieComponent.addCookie(UserType.MEMBER, member.getUsername());
+    }
+
+    @Override
+    public Member info(String token) {
+        String username = cookieComponent.getUsername(UserType.MEMBER, token);
+        Member member = memberDao.selectByUsernameOrPhone(username, username);
+        // 抹去重要信息
+        member.setPassword(null);
+        member.setId(null);
+        return member;
     }
 }

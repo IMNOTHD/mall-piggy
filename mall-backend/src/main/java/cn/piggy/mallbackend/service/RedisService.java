@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Redis操作
+ * Redis操作接口
  *
  * @author IMNOTHD
  * @date 2020/5/24 4:17
@@ -124,7 +124,7 @@ public interface RedisService {
     /**
      * 向Set结构中添加属性
      */
-    Long setAdd(String key, long time, Object... values);
+    Long setAddWithExpireTime(String key, long time, Object... values);
 
     /**
      * 是否为Set中的属性
