@@ -1,1 +1,0 @@
-export const serverSrc = "http://localhost:8080";

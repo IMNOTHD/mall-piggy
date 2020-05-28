@@ -6,7 +6,7 @@ import lombok.Data;
 
 /**
  * admin
- * @author 
+ * @author IMNOTHD
  */
 @Data
 public class Admin implements Serializable {

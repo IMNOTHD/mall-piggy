@@ -1,0 +1,13 @@
+.site-card-border-less-wrapper {
+    background: #ececec;
+    padding: 30px;
+    height: 100%;
+}
+
+.login-container {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
