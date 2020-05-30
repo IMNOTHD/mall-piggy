@@ -14,4 +14,6 @@ public interface AdminService {
     String login(String account, String password);
 
     Admin info(String token);
+
+    void logout(String token);
 }

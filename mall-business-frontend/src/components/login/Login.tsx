@@ -3,7 +3,10 @@ import {Card} from "antd";
 import './login.css'
 import LoginForm from "./form/loginForm";
 import RegisterForm from "./form/registerForm";
+import { createBrowserHistory } from 'history';
+import cookie from 'react-cookies';
 
+const history = createBrowserHistory({forceRefresh:true});
 const tabListNoTitle = [
     {
         key: 'login',
@@ -26,6 +29,14 @@ class Login extends React.Component {
     state = {
         noTitleKey: 'login',
     };
+
+    componentDidMount() {
+        const token = cookie.load('admin_token');
+        console.log(token);
+        if (typeof token !== "undefined") {
+            history.push("/");
+        }
+    }
 
     onTabChange = (key, type) => {
         console.log(key, type);

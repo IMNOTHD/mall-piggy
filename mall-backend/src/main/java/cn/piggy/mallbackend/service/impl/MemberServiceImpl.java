@@ -77,4 +77,12 @@ public class MemberServiceImpl implements MemberService {
         member.setId(null);
         return member;
     }
+
+    @Override
+    public void logout(String token) {
+        try {
+            cookieComponent.removeToken(UserType.MEMBER, token);
+        } catch (Exception ignored) {
+        }
+    }
 }

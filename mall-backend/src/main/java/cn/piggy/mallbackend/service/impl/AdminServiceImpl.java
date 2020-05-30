@@ -53,7 +53,7 @@ public class AdminServiceImpl implements AdminService {
             Asserts.validateFail("密码不得为空");
         }
         Admin admin = adminDao.selectByUsernameOrEmail(account, account);
-        if (account == null) {
+        if (admin == null) {
             return null;
         }
         if (!password.equals(admin.getPassword())) {
@@ -72,5 +72,13 @@ public class AdminServiceImpl implements AdminService {
         admin.setPassword(null);
         admin.setId(null);
         return admin;
+    }
+
+    @Override
+    public void logout(String token) {
+        try {
+            cookieComponent.removeToken(UserType.ADMIN, token);
+        } catch (Exception ignored) {
+        }
     }
 }

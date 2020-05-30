@@ -40,14 +40,17 @@ public class AdminController {
         // 设置30d的过期时间
         cookie.setMaxAge(60 * 60 * 24 * 30);
         httpServletResponse.addCookie(cookie);
+        // cookies跨域
+        httpServletResponse.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+        httpServletResponse.setHeader("Access-Control-Allow-Credentials", "true");
         return CommonResult.success();
     }
 
     @ApiOperation("商家注册")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult register(@RequestParam String username, @RequestParam String phone, @RequestParam String password) {
-        adminService.register(username, phone, password);
+    public CommonResult register(@RequestParam String username, @RequestParam String email, @RequestParam String password) {
+        adminService.register(username, email, password);
         return CommonResult.success("注册成功");
     }
 
@@ -56,7 +59,7 @@ public class AdminController {
     @ResponseBody
     public CommonResult info(HttpServletRequest httpServletRequest) {
         for (Cookie cookie : httpServletRequest.getCookies()) {
-            if ("member_token".equals(cookie.getName())) {
+            if ("admin_token".equals(cookie.getName())) {
                 Admin admin = adminService.info(cookie.getValue());
                 if (admin == null) {
                     return CommonResult.validateFailed("获取用户信息失败");
@@ -66,5 +69,17 @@ public class AdminController {
             }
         }
         return CommonResult.validateFailed("获取用户信息失败，请检查登录状态");
+    }
+
+    @ApiOperation("商家登出")
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult logout(HttpServletRequest httpServletRequest) {
+        for (Cookie cookie : httpServletRequest.getCookies()) {
+            if ("admin_token".equals(cookie.getName())) {
+                adminService.logout(cookie.getValue());
+            }
+        }
+        return CommonResult.validateFailed("登出成功");
     }
 }

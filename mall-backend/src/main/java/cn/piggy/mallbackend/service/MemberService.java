@@ -16,4 +16,6 @@ public interface MemberService {
     String login(String account, String password);
 
     Member info(String token);
+
+    void logout(String token);
 }

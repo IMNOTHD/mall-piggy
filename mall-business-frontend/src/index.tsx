@@ -3,25 +3,22 @@ import ReactDOM, {render} from 'react-dom';
 import './index.css';
 import 'antd/dist/antd.css';
 import * as serviceWorker from './serviceWorker';
-import {Route, Link, BrowserRouter as Router, BrowserRouter} from 'react-router-dom'
+import {Route, Router} from 'react-router-dom'
 import Main from "./components/main/Main"
 import Login from "./components/login/Login";
 import {createBrowserHistory} from 'history';
 
-const App = () => (
-    <div>
-        <div>
-            <Route exact path="/" component={Main} />
-            <Route path="/login" component={Login} />
-        </div>
+const history = createBrowserHistory();
 
-    </div>
+const App = () => (
+    <Router history={history}>
+        <Route exact path="/" component={Main} />
+        <Route path="/login" component={Login} />
+    </Router>
 )
 
 ReactDOM.render(
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>,
+    <App />,
     document.getElementById('root')
 );
 

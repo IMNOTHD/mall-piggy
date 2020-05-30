@@ -66,4 +66,16 @@ public class MemberController {
         }
         return CommonResult.validateFailed("获取用户信息失败，请检查登录状态");
     }
+
+    @ApiOperation("用户登出")
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult logout(HttpServletRequest httpServletRequest) {
+        for (Cookie cookie : httpServletRequest.getCookies()) {
+            if ("member_token".equals(cookie.getName())) {
+                memberService.logout(cookie.getValue());
+            }
+        }
+        return CommonResult.validateFailed("登出成功");
+    }
 }

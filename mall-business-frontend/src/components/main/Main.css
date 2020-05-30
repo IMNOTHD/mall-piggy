@@ -1,9 +1,29 @@
-#components-layout-demo-side .logo {
+#components-layout-demo-side {
     height: 32px;
-    background: rgba(255, 255, 255, 0.2);
     margin: 16px;
 }
 
 .site-layout .site-layout-background {
     background: #fff;
+}
+
+.logo {
+    width: 120px;
+    height: 31px;
+    margin: 16px 0 16px 0;
+    float: right;
+}
+
+.ant-layout-sider-trigger {
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
+    height: 48px;
+    color: #1890ff;
+    line-height: 48px;
+    text-align: center;
+    background: #e6f7ff;
+    cursor: pointer;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
 }
