@@ -25,6 +25,8 @@ function error(message) {
 class LoginForm extends React.Component {
 
     render() {
+        document.title = "登录 - 商家后台";
+
         const onFinish = async values => {
             let result = await Api.login({
                 account: values.account,

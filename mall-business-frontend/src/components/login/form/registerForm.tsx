@@ -45,6 +45,8 @@ const onFinishFailed = errorInfo => {
 class RegisterForm extends React.Component {
 
     render() {
+        document.title = "注册 - 商家后台";
+
         return (
             <Form
                 {...layout}

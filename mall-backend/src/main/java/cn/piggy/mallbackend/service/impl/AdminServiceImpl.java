@@ -68,6 +68,11 @@ public class AdminServiceImpl implements AdminService {
     public Admin info(String token) {
         String username = cookieComponent.getUsername(UserType.ADMIN, token);
         Admin admin = adminDao.selectByUsernameOrEmail(username, username);
+
+        if (admin == null) {
+            Asserts.validateFail("未登录");
+        }
+
         // 抹去重要信息
         admin.setPassword(null);
         admin.setId(null);

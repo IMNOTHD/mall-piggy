@@ -41,6 +41,24 @@ class Api {
             throw err;
         }
     }
+
+    async getProductCategory(param = {}) {
+        try {
+            let result : any = await axios.get(`${baseURL}/product/category`);
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    async createProduct(param = {}) {
+        try {
+            let result : any = await axios.post(`${baseURL}/product/create`, param);
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    }
 }
 
 export default new Api();
