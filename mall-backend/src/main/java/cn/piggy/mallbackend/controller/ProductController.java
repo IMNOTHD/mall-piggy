@@ -3,6 +3,7 @@ package cn.piggy.mallbackend.controller;
 import cn.piggy.mallbackend.common.UserType;
 import cn.piggy.mallbackend.common.api.CommonResult;
 import cn.piggy.mallbackend.component.CookieComponent;
+import cn.piggy.mallbackend.domain.Product;
 import cn.piggy.mallbackend.domain.ProductCategory;
 import cn.piggy.mallbackend.domain.ProductCategoryWithChildren;
 import cn.piggy.mallbackend.domain.ProductCreate;
@@ -16,14 +17,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author IMNOTHD
  * @date 2020/6/1 23:59
  */
 @Controller
-@Api(tags = "PmsProductController", description = "商品管理")
+@Api(tags = "ProductController", description = "商品管理")
 @RequestMapping("/product")
 public class ProductController {
     @Autowired
@@ -65,5 +68,49 @@ public class ProductController {
             return CommonResult.failed("查询出错，请重试");
         }
         return CommonResult.success(productCategoryWithChildrenList);
+    }
+
+    @ApiOperation("帐号下商品列表")
+    @RequestMapping(value = "/manage/list", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult manage(@RequestParam int page, @RequestParam int pageSize, HttpServletRequest httpServletRequest) {
+        if (page < 1) {
+            return CommonResult.validateFailed();
+        }
+
+        String adminToken = null;
+        for (Cookie cookie : httpServletRequest.getCookies()) {
+            if ("admin_token".equals(cookie.getName())) {
+                adminToken = cookie.getValue();
+            }
+        }
+        if (adminToken == null) {
+            return CommonResult.failed("未登录");
+        }
+
+        List<Product> productList = productService.getProductByAdmin(page, pageSize, cookieComponent.getUsername(UserType.ADMIN, adminToken));
+
+        return CommonResult.success(productList);
+    }
+
+    @ApiOperation("帐号下商品数量")
+    @RequestMapping(value = "/manage/count", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult count(HttpServletRequest httpServletRequest) {
+        String adminToken = null;
+        for (Cookie cookie : httpServletRequest.getCookies()) {
+            if ("admin_token".equals(cookie.getName())) {
+                adminToken = cookie.getValue();
+            }
+        }
+        if (adminToken == null) {
+            return CommonResult.failed("未登录");
+        }
+
+        int count = productService.countByAdmin(cookieComponent.getUsername(UserType.ADMIN, adminToken));
+
+        return CommonResult.success(new HashMap<String, Integer>() {{
+            put("count", count);
+        }});
     }
 }

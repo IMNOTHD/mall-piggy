@@ -59,6 +59,24 @@ class Api {
             throw err;
         }
     }
+
+    async getProductList(param = {}) {
+        try {
+            let result : any = await axios.get(`${baseURL}/product/manage/list?${stringify(param)}`);
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    async getCount(param = {}) {
+        try {
+            let result : any = await axios.get(`${baseURL}/product/manage/count`);
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    }
 }
 
 export default new Api();

@@ -20,6 +20,7 @@ import {
 import axios from "axios";
 import Api from "api/api";
 import {FormInstance} from 'antd/lib/form';
+import ImgCrop from 'antd-img-crop';
 
 const {TextArea} = Input;
 const layout = {
@@ -118,7 +119,7 @@ class NewItem extends React.Component {
             })
         } else {
             values.price = Math.floor(values.price * 100);
-            let fileList : string[] = [];
+            let fileList: string[] = [];
             values.upload.fileList.forEach((element) => {
                 fileList.push(element.response.url);
             });
@@ -163,6 +164,7 @@ class NewItem extends React.Component {
     onReset = () => {
         if (this.formRef.current !== undefined) {
             this.formRef.current?.resetFields();
+            this.setState({fileList: []})
         }
     }
 
@@ -206,18 +208,20 @@ class NewItem extends React.Component {
                         <Switch defaultChecked={false}/>
                     </Form.Item>
                     <Form.Item name={['upload']} label="商品图片" rules={[{required: true}]}>
-                        <Upload
-                            {...uploadProps}
-                            accept="image/*"
-                            fileList={this.state.fileList}
-                            customRequest={customRequest}
-                            onChange={this.handleChange}
-                            listType="picture"
-                            disabled={this.state.uploadButtonDisable}>
-                            <Button>
-                                <UploadOutlined/> Click to Upload
-                            </Button>
-                        </Upload>
+                        <ImgCrop rotate>
+                            <Upload
+                                {...uploadProps}
+                                accept="image/*"
+                                fileList={this.state.fileList}
+                                customRequest={customRequest}
+                                onChange={this.handleChange}
+                                listType="picture"
+                                disabled={this.state.uploadButtonDisable}>
+                                <Button>
+                                    <UploadOutlined/> Click to Upload
+                                </Button>
+                            </Upload>
+                        </ImgCrop>
                     </Form.Item>
                     <Form.Item name={['description']} label="商品描述" rules={[{required: true}]}>
                         <TextArea rows={5}/>
@@ -233,7 +237,7 @@ class NewItem extends React.Component {
                                 okText="Yes"
                                 cancelText="No"
                                 placement="bottom"
-                                icon={<QuestionCircleOutlined style={{ color: 'red' }}/>}>
+                                icon={<QuestionCircleOutlined style={{color: 'red'}}/>}>
                                 <Button danger type="primary">
                                     Reset
                                 </Button>

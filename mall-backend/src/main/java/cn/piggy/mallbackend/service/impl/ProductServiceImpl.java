@@ -82,6 +82,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void create(ProductCreate productCreate, String username) {
+        if (username == null) {
+            Asserts.validateFail("登录状态错误，请重新登录");
+        }
+
         Product product = new Product();
         product.setName(productCreate.getName());
         product.setDescription(productCreate.getDescription());
@@ -100,5 +104,25 @@ public class ProductServiceImpl implements ProductService {
         if (count == 0) {
             Asserts.fail("添加商品失败，请重试");
         }
+    }
+
+    @Override
+    public List<Product> getProductByAdmin(int page, int pageSize, String username) {
+        if (username == null) {
+            Asserts.validateFail("登录状态错误，请重新登录");
+        }
+
+        Admin admin = adminDao.selectByUsernameOrEmail(username, username);
+        return productDao.selectByAdminId(admin.getId(), pageSize * (page - 1), pageSize);
+    }
+
+    @Override
+    public int countByAdmin(String username) {
+        if (username == null) {
+            Asserts.validateFail("登录状态错误，请重新登录");
+        }
+
+        Admin admin = adminDao.selectByUsernameOrEmail(username, username);
+        return productDao.countByAdminId(admin.getId());
     }
 }

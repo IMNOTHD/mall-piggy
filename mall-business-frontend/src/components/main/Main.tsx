@@ -71,7 +71,7 @@ class Main extends React.Component {
         collapsed: false,
         username: "",
         breadcrumbList: ["数据管理", "销量统计"],
-        inner: <NewItem />,
+        inner: <TotalControl />,
     };
 
     onCollapse = collapsed => {
@@ -80,7 +80,6 @@ class Main extends React.Component {
 
     async componentDidMount() {
         let result = await Api.info();
-        console.log("result", result);
         if (result.data.code !== 200) {
             cookie.remove('admin_token');
             loginHistory.push("/login");
@@ -112,7 +111,7 @@ class Main extends React.Component {
                         <Menu
                             onClick={handleClick}
                             mode="inline"
-                            defaultSelectedKeys={['itemControl-newItem']}
+                            defaultSelectedKeys={['itemControl-totalControl']}
                             defaultOpenKeys={['stats', 'itemControl']}
                             style={{height: '100%'}}>
                             <SubMenu key="stats" icon={<LineChartOutlined />} title="数据管理">

@@ -24,6 +24,17 @@
     from product
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="selectByAdminId" resultType="cn.piggy.mallbackend.domain.Product">
+    select
+    <include refid="Base_Column_List" />
+    from product
+    where admin_id = #{adminId}
+    order by id ASC
+    limit #{pageSize} offset #{pageOffset}
+  </select>
+  <select id="countByAdminId" resultType="java.lang.Integer">
+    select count(*) from product where admin_id=#{adminId}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from product
     where id = #{id,jdbcType=BIGINT}
