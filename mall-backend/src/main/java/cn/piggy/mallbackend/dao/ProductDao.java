@@ -32,4 +32,10 @@ public interface ProductDao {
     List<Product> selectByAdminId(@Param("adminId") int adminId, @Param("pageOffset") int pageOffset, @Param("pageSize") int pageSize);
 
     int countByAdminId(@Param("adminId") int adminId);
+
+    int changePublishStatus(@Param("productSn") String productSn);
+
+    int changeStock(@Param("productSn") String productSn, @Param("stock") int stock);
+
+    int deleteByProductSn(@Param("productSn") String productSn);
 }

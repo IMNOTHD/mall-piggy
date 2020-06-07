@@ -1076,6 +1076,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.10.2":
+  version "7.10.2"
+  resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.10.2.tgz#d103f21f2602497d38348a32e008637d506db839"
+  integrity sha1-0QPyHyYCSX04NIoy4AhjfVBtuDk=
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/template@^7.10.0", "@babel/template@^7.4.0", "@babel/template@^7.8.3", "@babel/template@^7.8.6":
   version "7.10.0"
   resolved "https://registry.npm.taobao.org/@babel/template/download/@babel/template-7.10.0.tgz?cache=0&sync_timestamp=1590530608612&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Ftemplate%2Fdownload%2F%40babel%2Ftemplate-7.10.0.tgz#f15d852ce16cd5fb3e219097a75f662710b249b1"
@@ -2045,6 +2052,14 @@ ansi-styles@^4.0.0, ansi-styles@^4.1.0:
   dependencies:
     "@types/color-name" "^1.1.1"
     color-convert "^2.0.1"
+
+antd-img-crop@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.npm.taobao.org/antd-img-crop/download/antd-img-crop-3.3.0.tgz#871b918cf61e416984b7943edaeef56f3b12c6a1"
+  integrity sha1-hxuRjPYeQWmEt5Q+2u71bzsSxqE=
+  dependencies:
+    "@babel/runtime" "^7.10.2"
+    react-easy-crop "^3.0.1"
 
 antd@^4.2.5:
   version "4.2.5"
@@ -9205,6 +9220,13 @@ react-dom@^16.13.1:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
+react-easy-crop@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.npm.taobao.org/react-easy-crop/download/react-easy-crop-3.0.1.tgz#d3f49dd2f1ac1b81c9d657a71c5f84b907e0c5d0"
+  integrity sha1-0/Sd0vGsG4HJ1lenHF+EuQfgxdA=
+  dependencies:
+    tslib "1.11.2"
+
 react-error-overlay@^6.0.7:
   version "6.0.7"
   resolved "https://registry.npm.taobao.org/react-error-overlay/download/react-error-overlay-6.0.7.tgz#1dcfb459ab671d53f660a991513cb2f0a0553108"
@@ -10777,6 +10799,11 @@ ts-pnp@^1.1.6:
   version "1.2.0"
   resolved "https://registry.npm.taobao.org/ts-pnp/download/ts-pnp-1.2.0.tgz#a500ad084b0798f1c3071af391e65912c86bca92"
   integrity sha1-pQCtCEsHmPHDBxrzkeZZEshrypI=
+
+tslib@1.11.2:
+  version "1.11.2"
+  resolved "https://registry.npm.taobao.org/tslib/download/tslib-1.11.2.tgz?cache=0&sync_timestamp=1589412852592&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftslib%2Fdownload%2Ftslib-1.11.2.tgz#9c79d83272c9a7aaf166f73915c9667ecdde3cc9"
+  integrity sha1-nHnYMnLJp6rxZvc5Fclmfs3ePMk=
 
 tslib@^1.10.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.13.0"

@@ -51,6 +51,25 @@ public class ProductController {
         return CommonResult.success();
     }
 
+    @ApiOperation("删除商品")
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult delete(@RequestParam String productSn, HttpServletRequest httpServletRequest) {
+        String adminToken = null;
+        for (Cookie cookie : httpServletRequest.getCookies()) {
+            if ("admin_token".equals(cookie.getName())) {
+                adminToken = cookie.getValue();
+            }
+        }
+        if (adminToken == null) {
+            return CommonResult.failed("未登录");
+        }
+
+        productService.deleteProduct(productSn);
+
+        return CommonResult.success();
+    }
+
     @ApiOperation("上传图片")
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
@@ -112,5 +131,43 @@ public class ProductController {
         return CommonResult.success(new HashMap<String, Integer>() {{
             put("count", count);
         }});
+    }
+
+    @ApiOperation("修改上架状态")
+    @RequestMapping(value = "/manage/changePublish", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult changePublish(@RequestParam String productSn, HttpServletRequest httpServletRequest) {
+        String adminToken = null;
+        for (Cookie cookie : httpServletRequest.getCookies()) {
+            if ("admin_token".equals(cookie.getName())) {
+                adminToken = cookie.getValue();
+            }
+        }
+        if (adminToken == null) {
+            return CommonResult.failed("未登录");
+        }
+
+        productService.changePublish(productSn);
+
+        return CommonResult.success();
+    }
+
+    @ApiOperation("修改库存")
+    @RequestMapping(value = "/manage/changeStock", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult changeStock(@RequestParam String productSn, @RequestParam int stock, HttpServletRequest httpServletRequest) {
+        String adminToken = null;
+        for (Cookie cookie : httpServletRequest.getCookies()) {
+            if ("admin_token".equals(cookie.getName())) {
+                adminToken = cookie.getValue();
+            }
+        }
+        if (adminToken == null) {
+            return CommonResult.failed("未登录");
+        }
+
+        productService.changeStock(productSn, stock);
+
+        return CommonResult.success();
     }
 }

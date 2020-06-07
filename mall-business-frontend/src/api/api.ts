@@ -77,6 +77,33 @@ class Api {
             throw err;
         }
     }
+
+    async deleteProduct(param = {}) {
+        try {
+            let result : any = await axios.post(`${baseURL}/product/delete`, stringify(param));
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    async changePublish(param = {}) {
+        try {
+            let result : any = await axios.post(`${baseURL}/product/manage/changePublish`, stringify(param));
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    async changeStock(param = {}) {
+        try {
+            let result : any = await axios.post(`${baseURL}/product/manage/changeStock`, stringify(param));
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    }
 }
 
 export default new Api();

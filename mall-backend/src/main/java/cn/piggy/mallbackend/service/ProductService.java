@@ -22,4 +22,10 @@ public interface ProductService {
     List<Product> getProductByAdmin(int page, int pageSize, String username);
 
     int countByAdmin(String username);
+
+    void changePublish(String productSn);
+
+    void changeStock(String productSn, int stock);
+
+    void deleteProduct(String productSn);
 }

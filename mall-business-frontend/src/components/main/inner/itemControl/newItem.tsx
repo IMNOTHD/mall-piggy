@@ -20,7 +20,6 @@ import {
 import axios from "axios";
 import Api from "api/api";
 import {FormInstance} from 'antd/lib/form';
-import ImgCrop from 'antd-img-crop';
 
 const {TextArea} = Input;
 const layout = {
@@ -208,20 +207,18 @@ class NewItem extends React.Component {
                         <Switch defaultChecked={false}/>
                     </Form.Item>
                     <Form.Item name={['upload']} label="商品图片" rules={[{required: true}]}>
-                        <ImgCrop rotate>
-                            <Upload
-                                {...uploadProps}
-                                accept="image/*"
-                                fileList={this.state.fileList}
-                                customRequest={customRequest}
-                                onChange={this.handleChange}
-                                listType="picture"
-                                disabled={this.state.uploadButtonDisable}>
-                                <Button>
-                                    <UploadOutlined/> Click to Upload
-                                </Button>
-                            </Upload>
-                        </ImgCrop>
+                        <Upload
+                            {...uploadProps}
+                            accept="image/*"
+                            fileList={this.state.fileList}
+                            customRequest={customRequest}
+                            onChange={this.handleChange}
+                            listType="picture"
+                            disabled={this.state.uploadButtonDisable}>
+                            <Button>
+                                <UploadOutlined/> Click to Upload
+                            </Button>
+                        </Upload>
                     </Form.Item>
                     <Form.Item name={['description']} label="商品描述" rules={[{required: true}]}>
                         <TextArea rows={5}/>

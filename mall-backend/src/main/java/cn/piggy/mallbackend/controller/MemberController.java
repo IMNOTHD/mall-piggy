@@ -54,6 +54,10 @@ public class MemberController {
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult info(HttpServletRequest httpServletRequest) {
+        if (httpServletRequest.getCookies() == null) {
+            return CommonResult.validateFailed("获取用户信息失败，请检查登录状态");
+        }
+
         for (Cookie cookie : httpServletRequest.getCookies()) {
             if ("member_token".equals(cookie.getName())) {
                 Member member = memberService.info(cookie.getValue());
@@ -71,6 +75,9 @@ public class MemberController {
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult logout(HttpServletRequest httpServletRequest) {
+        if (httpServletRequest.getCookies() == null) {
+            return CommonResult.validateFailed("未登录");
+        }
         for (Cookie cookie : httpServletRequest.getCookies()) {
             if ("member_token".equals(cookie.getName())) {
                 memberService.logout(cookie.getValue());

@@ -71,7 +71,7 @@ class Main extends React.Component {
         collapsed: false,
         username: "",
         breadcrumbList: ["数据管理", "销量统计"],
-        inner: <TotalControl />,
+        inner: <OrderControl />,
     };
 
     onCollapse = collapsed => {
@@ -111,7 +111,7 @@ class Main extends React.Component {
                         <Menu
                             onClick={handleClick}
                             mode="inline"
-                            defaultSelectedKeys={['itemControl-totalControl']}
+                            defaultSelectedKeys={['stats-orderControl']}
                             defaultOpenKeys={['stats', 'itemControl']}
                             style={{height: '100%'}}>
                             <SubMenu key="stats" icon={<LineChartOutlined />} title="数据管理">

@@ -1,19 +1,25 @@
+import index from "@/components/index";
+import cart from "@/components/cart";
+import me from "@/components/me";
+import login from "@/components/me/login";
+
 const routers = [
     {
-        path: '/index',
+        path: '/',
         name: 'index',
-        component: () => import('@/components/index/Index')
+        component: index
     }, {
         path: '/me',
         name: 'me',
-        component: () => import('@/components/me/Me')
+        component: me
     }, {
         path: '/cart',
         name: 'cart',
-        component: () => import('@/components/cart/Cart')
+        component: cart
     }, {
-        path: '*',
-        redirect: '/index'
+        path: '/login',
+        name: 'login',
+        component: login
     }
 ];
 export default routers

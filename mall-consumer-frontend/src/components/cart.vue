@@ -1,16 +1,18 @@
 <template>
     <div>
-        index
+        cart
     </div>
 </template>
 
 <script>
+
     export default {
-        name: "index",
+        name: "cart",
         mounted() {
-            document.title = "首页";
+            document.title = "购物车";
         },
         methods: {
+
         }
     }
 </script>

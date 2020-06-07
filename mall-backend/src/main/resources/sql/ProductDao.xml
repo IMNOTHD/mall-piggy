@@ -24,7 +24,7 @@
     from product
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <select id="selectByAdminId" resultType="cn.piggy.mallbackend.domain.Product">
+  <select id="selectByAdminId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from product
@@ -38,6 +38,10 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from product
     where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByProductSn" parameterType="java.lang.String">
+    delete from product
+    where product_sn = #{productSn}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.piggy.mallbackend.domain.Product" useGeneratedKeys="true">
     insert into product (product_category_id, `name`, pic, 
@@ -155,5 +159,15 @@
       description = #{description,jdbcType=VARCHAR},
       product_sn = #{productSn,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="changePublishStatus">
+    update product
+    set publish_status = 1 - publish_status
+    where product_sn = #{productSn};
+  </update>
+  <update id="changeStock">
+    update product
+    set stock = #{stock}
+    where product_sn = #{productSn};
   </update>
 </mapper>

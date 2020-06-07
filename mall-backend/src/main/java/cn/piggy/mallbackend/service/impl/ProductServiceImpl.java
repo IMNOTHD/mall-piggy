@@ -125,4 +125,19 @@ public class ProductServiceImpl implements ProductService {
         Admin admin = adminDao.selectByUsernameOrEmail(username, username);
         return productDao.countByAdminId(admin.getId());
     }
+
+    @Override
+    public void changePublish(String productSn) {
+        productDao.changePublishStatus(productSn);
+    }
+
+    @Override
+    public void changeStock(String productSn, int stock) {
+        productDao.changeStock(productSn, stock);
+    }
+
+    @Override
+    public void deleteProduct(String productSn) {
+        productDao.deleteByProductSn(productSn);
+    }
 }
