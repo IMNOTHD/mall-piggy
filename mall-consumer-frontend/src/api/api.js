@@ -33,4 +33,66 @@ export default {
         let result = await axios.post(`${baseURL}/member/logout`);
         return result;
     },
+
+    // eslint-disable-next-line no-unused-vars
+    async getAddressList(param = {}) {
+        let result = await axios.get(`${baseURL}/member/address/list`);
+        return result;
+    },
+
+    async getAddressById(param = {}) {
+        let result = await axios.get(`${baseURL}/member/address/query?${qs.stringify(param)}`);
+        return result;
+    },
+
+    async updateAddress(param = {}) {
+        let result = await axios.post(`${baseURL}/member/address/update`, param);
+        return result;
+    },
+
+    async createAddress(param = {}) {
+        let result = await axios.post(`${baseURL}/member/address/create`, param);
+        return result;
+    },
+
+    async deleteAddress(param = {}) {
+        let result = await axios.post(`${baseURL}/member/address/delete?${qs.stringify(param)}`);
+        return result;
+    },
+
+    async getCategoryName(param = {}) {
+        let result = await axios.get(`${baseURL}/product/category/queryName?${qs.stringify(param)}`);
+        return result;
+    },
+
+    async getCategoryProduct(param = {}) {
+        let result = await axios.get(`${baseURL}/product/category/query?${qs.stringify(param)}`);
+        return result;
+    },
+
+    async getProduct(param = {}) {
+        let result = await axios.get(`${baseURL}/product/query?${qs.stringify(param)}`);
+        return result;
+    },
+
+    // eslint-disable-next-line no-unused-vars
+    async getCartList(param = {}) {
+        let result = await axios.get(`${baseURL}/cart/list`);
+        return result;
+    },
+
+    async addCart(param = {}) {
+        let result = await axios.post(`${baseURL}/cart/add`, param);
+        return result;
+    },
+
+    async setCartNum(param = {}) {
+        let result = await axios.post(`${baseURL}/cart/setNum`, param);
+        return result;
+    },
+
+    async deleteCart(param = {}) {
+        let result = await axios.post(`${baseURL}/cart/delete`, param);
+        return result;
+    },
 }

@@ -140,4 +140,22 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(String productSn) {
         productDao.deleteByProductSn(productSn);
     }
+
+    @Override
+    public List<Product> showCategoryProduct(Long id) {
+        List<Product> productList = productDao.selectByCategoryId(id);
+        return productList;
+    }
+
+    @Override
+    public String showCategoryName(Long id) {
+        ProductCategory productCategory = productCategoryDao.selectByPrimaryKey(id);
+
+        return productCategory.getName();
+    }
+
+    @Override
+    public Product queryWithProductSn(String productSn) {
+        return productDao.selectByProductSn(productSn);
+    }
 }

@@ -72,6 +72,11 @@ public class MemberServiceImpl implements MemberService {
     public Member info(String token) {
         String username = cookieComponent.getUsername(UserType.MEMBER, token);
         Member member = memberDao.selectByUsernameOrPhone(username, username);
+
+        if (member == null) {
+            Asserts.validateFail("登录失效");
+        }
+
         // 抹去重要信息
         member.setPassword(null);
         member.setId(null);

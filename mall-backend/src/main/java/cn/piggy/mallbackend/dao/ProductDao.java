@@ -38,4 +38,8 @@ public interface ProductDao {
     int changeStock(@Param("productSn") String productSn, @Param("stock") int stock);
 
     int deleteByProductSn(@Param("productSn") String productSn);
+
+    List<Product> selectByCategoryId(Long id);
+
+    Product selectByProductSn(String productSn);
 }

@@ -69,7 +69,7 @@
     }
 
     .page-wrap {
-        background-color: #f3f3f3;
+        background-color: #f0f0f0;
         overflow: auto;
     }
 </style>

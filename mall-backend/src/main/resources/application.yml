@@ -41,5 +41,6 @@ redis:
   key:
     member: 'member'
     admin: 'admin'
+    cart: 'cart'
   expire:
-    common: 86400 # 默认24h超时
+    common: 2592000 # 默认30d超时

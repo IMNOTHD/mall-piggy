@@ -97,7 +97,6 @@ class TotalControl extends React.Component {
     }
 
     showModal = (productSn, stock) => {
-        console.log(productSn, stock);
         this.setState({tmpProductSn: productSn});
         this.setState({tmpStock: stock});
 

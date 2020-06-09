@@ -101,7 +101,6 @@ class NewItem extends React.Component {
 
     async componentDidMount() {
         let result = await Api.getProductCategory();
-        console.log("result", result);
         if (result.data.code !== 200) {
             message.error(result.data.message);
         } else {

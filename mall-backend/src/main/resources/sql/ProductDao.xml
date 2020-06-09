@@ -35,6 +35,18 @@
   <select id="countByAdminId" resultType="java.lang.Integer">
     select count(*) from product where admin_id=#{adminId}
   </select>
+  <select id="selectByCategoryId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from product
+    where product_category_id = #{id} and publish_status = 1
+  </select>
+  <select id="selectByProductSn" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from product
+    where product_sn = #{productSn}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from product
     where id = #{id,jdbcType=BIGINT}

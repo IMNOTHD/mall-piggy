@@ -1,14 +1,29 @@
 <template>
     <div>
         <!--会员card-->
-        <div style="color: #333333; padding: 20px; border-radius: 10px; margin: 20px; background-color: #ffffff; height: auto;"
-             class="card">
+        <div style="color: #333333; padding: 20px; border-radius: 10px; margin: 20px; background-color: #ffffff; height: auto;">
             <div style="padding-top: 5px; padding-bottom: 15px; display: inline-block; padding-left: 20px">
                 <span style="font-size: 20px; font-weight: 700; font-family: 'Noto Serif SC', serif;">{{ memberData.nickname === undefined ? memberData.username : memberData.nickname }}</span>
             </div>
         </div>
 
-        <!--选项card-->
+        <!--地址管理card-->
+        <van-cell-group style="margin: 20px; border-radius: 10px;">
+            <van-cell
+                    is-link
+                    @click="$router.push('/addressList')"
+                    size="large"
+                    style="border-radius: 10px">
+                <template #title>
+                    <span>地址管理</span>
+                </template>
+                <template #icon>
+                    <van-icon name="location-o" style="line-height: inherit; margin-right: 8px;" color="yellowgreen"/>
+                </template>
+            </van-cell>
+        </van-cell-group>
+
+        <!--登出card-->
         <van-cell-group style="margin: 20px; border-radius: 10px;">
             <van-cell
                     is-link

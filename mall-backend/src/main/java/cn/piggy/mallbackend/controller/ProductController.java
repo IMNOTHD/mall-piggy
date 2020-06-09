@@ -78,6 +78,33 @@ public class ProductController {
         return result;
     }
 
+    @ApiOperation("查询子分类下商品")
+    @RequestMapping(value = "/category/query", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult categoryById(Long id) {
+        List<Product> productList = productService.showCategoryProduct(id);
+
+        return CommonResult.success(productList);
+    }
+
+    @ApiOperation("查询子分类名字")
+    @RequestMapping(value = "/category/queryName", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult categoryNameById(@RequestParam Long id) {
+        String name = productService.showCategoryName(id);
+
+        return CommonResult.success(name);
+    }
+    @ApiOperation("查询子分类名字")
+    @RequestMapping(value = "/query", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult queryWithProductSn(@RequestParam String productSn) {
+        Product product = productService.queryWithProductSn(productSn);
+
+        return CommonResult.success(product);
+    }
+
+
     @ApiOperation("查询分类")
     @RequestMapping(value = "/category", method = RequestMethod.GET)
     @ResponseBody

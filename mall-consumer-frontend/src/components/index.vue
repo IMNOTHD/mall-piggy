@@ -6,7 +6,8 @@
         </van-sidebar>
         <div style="float:right; width:100%;" :style="{height: `${clientHeight - 50}px`}" >
             <van-grid :gutter="25" :column-num="3" square border clickable style="padding-top: 25px;">
-                <van-grid-item v-for="(item, index) in categoryList[activeKey]['children']" :key="index" icon="photo-o" :text="item.label" />
+                <van-grid-item v-for="(item, index) in categoryList[activeKey]['children']" :key="index" icon="photo-o" :text="item.label"
+                                    @click="$router.push(`/showCategory?id=${item.value}`)"/>
             </van-grid>
         </div>
     </div>

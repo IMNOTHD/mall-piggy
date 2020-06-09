@@ -28,4 +28,10 @@ public interface ProductService {
     void changeStock(String productSn, int stock);
 
     void deleteProduct(String productSn);
+
+    List<Product> showCategoryProduct(Long id);
+
+    String showCategoryName(Long id);
+
+    Product queryWithProductSn(String ProductSn);
 }
