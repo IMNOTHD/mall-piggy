@@ -111,8 +111,22 @@
             onChangeNum(value, detail) {
                 this.$store.commit('changeProductSelectNum', value, detail);
             },
-            onSubmit() {
-                this.$toast('submit');
+            async onSubmit() {
+                let productList = [];
+                for (let i = 0; i < this.$store.state.orderParam.length; i++) {
+                    productList.push(this.$store.state.orderParam[i]);
+                }
+                let result = await api.addOrder({
+                    receiverName: this.selectedAddress.name,
+                    receiverAddress: this.selectedAddress.address,
+                    receiverPhone: this.selectedAddress.tel,
+                    orderItems: productList,
+                });
+                if (result.data.code === 200) {
+                    this.$router.push('/orderList');
+                } else {
+                    this.$dialog.alert({message: result.data.message});
+                }
             },
             onAdd() {
                 this.$router.push(`/addressEdit?type=create`);

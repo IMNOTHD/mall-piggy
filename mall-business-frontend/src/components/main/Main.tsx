@@ -53,7 +53,7 @@ const menuMap = {
     "stats": {
         "value": "数据管理",
         "items": {
-            "stats-sales": "销量统计",
+            "stats-sales": "欢迎",
             "stats-orderControl": "订单管理",
         }
     },
@@ -70,8 +70,8 @@ class Main extends React.Component {
     state = {
         collapsed: false,
         username: "",
-        breadcrumbList: ["数据管理", "销量统计"],
-        inner: <OrderControl />,
+        breadcrumbList: ["数据管理", "欢迎"],
+        inner: <Sales />,
     };
 
     onCollapse = collapsed => {
@@ -111,11 +111,11 @@ class Main extends React.Component {
                         <Menu
                             onClick={handleClick}
                             mode="inline"
-                            defaultSelectedKeys={['stats-orderControl']}
+                            defaultSelectedKeys={['stats-sales']}
                             defaultOpenKeys={['stats', 'itemControl']}
                             style={{height: '100%'}}>
                             <SubMenu key="stats" icon={<LineChartOutlined />} title="数据管理">
-                                <Menu.Item key="stats-sales">销量统计</Menu.Item>
+                                <Menu.Item key="stats-sales">欢迎</Menu.Item>
                                 <Menu.Item key="stats-orderControl">订单管理</Menu.Item>
                             </SubMenu>
                             <SubMenu key="itemControl" icon={<LaptopOutlined/>} title="商品管理">

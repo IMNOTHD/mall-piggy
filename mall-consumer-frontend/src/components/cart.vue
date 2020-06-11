@@ -56,11 +56,19 @@
         <div style="position: absolute; bottom: 0; width: 100%; height: 100px;">
             <div style="height: 50px; width: 100%; background-color: rgb(247, 248, 250); align-items: center; display: flex">
                     <div style="text-align: left; padding-left: 16px;">
-                        <van-checkbox v-model="allChecked" @change="onAllCheckChange">全选</van-checkbox>
+                        <van-checkbox v-model="allChecked" @click="onAllCheck">全选</van-checkbox>
                     </div>
                     <div style="flex: 1; text-align: right; padding-right: 16px;">
+                        <div class="van-card__price" style="margin-right: 10px">
+                            <div style="color: red;">
+                                <span style="color: #000000">合计：</span>
+                                <span class="van-card__price-currency">¥</span><span
+                                    class="van-card__price-integer">{{ $store.state.orderPrice / 100 }}</span>.<span
+                                    class="van-card__price-decimal">{{ ($store.state.orderPrice % 100).toString().padStart(2, '0') }}</span>
+                            </div>
+                        </div>
                         <van-button round type="danger" class="van-submit-bar__button van-submit-bar__button--danger"
-                                    style="font-size: 16px">结 算
+                                    style="font-size: 16px" @click="onSubmit">结 算
                         </van-button>
                     </div>
             </div>
@@ -90,15 +98,21 @@
             this.getCartList();
         },
         methods: {
-            onCheckBoxChange() {
-                if (this.checkedList.length === this.productParam.length) {
-                    this.allChecked = true;
+            onSubmit() {
+                if (this.checkedList.length === 0) {
+                    this.$toast.fail('请选择至少一样商品');
                 } else {
-                    this.allChecked = false;
+                    this.$router.push('/confirmOrder');
                 }
             },
-            onAllCheckChange() {
-                if (this.allChecked === false) {
+            onCheckBoxChange() {
+                this.allChecked = this.checkedList.length === this.productParam.length;
+
+                this.$store.commit('setOrderParam', this.checkedList);
+            },
+            onAllCheck() {
+                // 点击时allChecked会先与此调用改变, 因此逻辑需相反
+                if (this.allChecked) {
                     this.$refs.checkboxGroup.toggleAll(true);
                 } else {
                     this.$refs.checkboxGroup.toggleAll(false);
@@ -140,6 +154,7 @@
                 }
 
                 await this.setProductParamList();
+                this.$refs.checkboxGroup.toggleAll(false);
             },
             getPic(str) {
                 return str.slice(2, -2).split('","');

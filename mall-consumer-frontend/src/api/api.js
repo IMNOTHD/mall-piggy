@@ -3,7 +3,7 @@ import qs from "qs"
 
 axios.defaults.withCredentials = true;
 
-const baseURL = 'http://192.168.2.157:8080';
+const baseURL = 'http://192.168.43.166:8080';
 
 export default {
     // eslint-disable-next-line no-unused-vars
@@ -93,6 +93,27 @@ export default {
 
     async deleteCart(param = {}) {
         let result = await axios.post(`${baseURL}/cart/delete`, param);
+        return result;
+    },
+
+    async addOrder(param = {}) {
+        let result = await axios.post(`${baseURL}/order/add`, param);
+        return result;
+    },
+
+    // eslint-disable-next-line no-unused-vars
+    async orderList(param = {}) {
+        let result = await axios.get(`${baseURL}/member/order/list`);
+        return result;
+    },
+
+    async orderDetail(param = {}) {
+        let result = await axios.get(`${baseURL}/order/detail?${qs.stringify(param)}`);
+        return result;
+    },
+
+    async getSnapshot(param = {}) {
+        let result = await axios.get(`${baseURL}/order/snapshot?${qs.stringify(param)}`);
         return result;
     },
 }

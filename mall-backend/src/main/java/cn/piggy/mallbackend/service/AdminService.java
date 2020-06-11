@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @date 2020/5/24 23:04
  */
 public interface AdminService {
-    @Transactional(rollbackFor = RuntimeException.class)
+    @Transactional(rollbackFor = Exception.class)
     void register(String username, String email, String password);
 
     String login(String account, String password);

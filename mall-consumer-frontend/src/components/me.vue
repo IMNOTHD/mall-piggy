@@ -11,6 +11,18 @@
         <van-cell-group style="margin: 20px; border-radius: 10px;">
             <van-cell
                     is-link
+                    @click="$router.push('/orderList')"
+                    size="large"
+                    style="border-radius: 10px">
+                <template #title>
+                    <span>订单列表</span>
+                </template>
+                <template #icon>
+                    <van-icon name="balance-list-o" style="line-height: inherit; margin-right: 8px;" color="pink"/>
+                </template>
+            </van-cell>
+            <van-cell
+                    is-link
                     @click="$router.push('/addressList')"
                     size="large"
                     style="border-radius: 10px">

@@ -1,8 +1,11 @@
 package cn.piggy.mallbackend.controller;
 
+import cn.piggy.mallbackend.common.UserType;
 import cn.piggy.mallbackend.common.api.CommonResult;
+import cn.piggy.mallbackend.component.CookieComponent;
 import cn.piggy.mallbackend.domain.Admin;
 import cn.piggy.mallbackend.service.AdminService;
+import cn.piggy.mallbackend.service.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,10 @@ import javax.servlet.http.HttpServletResponse;
 public class AdminController {
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private OrderService orderService;
+    @Autowired
+    private CookieComponent cookieComponent;
 
     @ApiOperation("商家登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -81,5 +88,26 @@ public class AdminController {
             }
         }
         return CommonResult.validateFailed("登出成功");
+    }
+
+    @ApiOperation("查询订单列表")
+    @RequestMapping(value = "/order/list", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult orderList(HttpServletRequest httpServletRequest) {
+        if (httpServletRequest.getCookies() == null) {
+            return CommonResult.validateFailed("未登录");
+        }
+
+        String adminToken = null;
+        for (Cookie cookie : httpServletRequest.getCookies()) {
+            if ("admin_token".equals(cookie.getName())) {
+                adminToken = cookie.getValue();
+            }
+        }
+        if (adminToken == null) {
+            return CommonResult.failed("未登录");
+        }
+
+        return CommonResult.success(orderService.adminList(cookieComponent.getUsername(UserType.ADMIN, adminToken)));
     }
 }

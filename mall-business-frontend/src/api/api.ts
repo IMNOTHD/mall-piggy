@@ -104,6 +104,15 @@ class Api {
             throw err;
         }
     }
+
+    async getOrderList(param = {}) {
+        try {
+            let result : any = await axios.get(`${baseURL}/admin/order/list`);
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    }
 }
 
 export default new Api();

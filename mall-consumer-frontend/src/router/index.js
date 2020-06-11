@@ -7,6 +7,7 @@ import addressEdit from "@/components/me/addressEdit";
 import showCategory from "@/components/index/showCategory";
 import productDetail from "@/components/index/productDetail";
 import confirmOrder from "@/components/confirmOrder";
+import orderList from "@/components/orderList";
 
 const routers = [
     {
@@ -45,6 +46,10 @@ const routers = [
         path: '/confirmOrder',
         name: 'confirmOrder',
         component: confirmOrder
+    }, {
+        path: '/orderList',
+        name: 'orderList',
+        component: orderList
     }
 ];
 export default routers

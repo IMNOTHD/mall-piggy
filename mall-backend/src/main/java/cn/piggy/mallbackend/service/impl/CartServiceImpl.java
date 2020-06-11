@@ -27,7 +27,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public void add(CartItem cartItem, String username) {
         // 使用hash存储
-        String key = redisDatabase + ":" + username;
+        String key = redisDatabase + ":cart:" + username;
         boolean isProductInRedis = redisService.hashHasKey(key, cartItem.getProductSn());
         if (isProductInRedis) {
             int numInRedis = (int) redisService.hashGet(key, cartItem.getProductSn());
@@ -40,7 +40,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void delete(CartItem cartItem, String username) {
-        String key = redisDatabase + ":" + username;
+        String key = redisDatabase + ":cart:" + username;
         boolean isProductInRedis = redisService.hashHasKey(key, cartItem.getProductSn());
         if (isProductInRedis) {
             redisService.hashDel(key, cartItem.getProductSn());
@@ -49,13 +49,13 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void setNum(CartItem cartItem, String username) {
-        String key = redisDatabase + ":" + username;
+        String key = redisDatabase + ":cart:" + username;
         redisService.hashSet(key, cartItem.getProductSn(), cartItem.getSelectedNum());
     }
 
     @Override
     public List<CartItem> list(String username) {
-        String key = redisDatabase + ":" + username;
+        String key = redisDatabase + ":cart:" + username;
         Map<Object, Object> cartMap = redisService.hashGetAll(key);
         List<CartItem> cartItemList = new ArrayList<>();
         cartMap.forEach((productSn, selectedNum) -> {
